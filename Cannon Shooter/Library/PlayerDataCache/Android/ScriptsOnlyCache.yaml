@@ -1,7 +1,7 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
-    - BubbleSoul
+    - CannonSoul
     - RayCastShooter
     - blinkText
     - btnCloseOnMenuGame
@@ -767,10 +767,10 @@ ScriptsOnlyBuild:
     className: loadLevel
   - hash:
       serializedVersion: 2
-      Hash: 8c700646b61cccc2c6870f80af32b091
+      Hash: 04ea273ce0c41d021813835a498a44d1
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: BubbleSoul
+    className: CannonSoul
   - hash:
       serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb

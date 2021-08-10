@@ -91,6 +91,7 @@ public class CannonSoul : MonoBehaviour {
     public Transform cylinderAxis = null;
     public Transform ring = null;
     public Transform cannon = null;
+    public Transform wheel = null;
 
     // Materials
     public Material transpMaterial = null;
@@ -101,6 +102,8 @@ public class CannonSoul : MonoBehaviour {
     public AudioSource audioSourceBG;
     public AudioClip leftCannonMove;
     public AudioClip rightCannonMove;
+    public AudioClip leftCannonMove2;
+    public AudioClip rightCannonMove2;
     public AudioClip cannon0;
     public AudioClip cannon1;
     public AudioClip cannon2;
@@ -120,7 +123,9 @@ public class CannonSoul : MonoBehaviour {
     public Sprite gateWall = null;
     public Sprite bgBuild = null;
     public Sprite gateBuild = null;
-    
+    public Sprite bgFuture = null;
+    public Sprite gateFuture = null;
+
     // Control variables
     private int maxLine = 10;
     private int deadLine = 15;
@@ -906,10 +911,21 @@ public class CannonSoul : MonoBehaviour {
         {
             TimeSpan ts = zeit.Elapsed;
             zeit.Stop();
-            Color color = cylinder.GetComponent<MeshRenderer>().material.color;
+
+            Color color;
+            if (!cylinder.GetComponent<MeshRenderer>()) {
+                color = cylinder.transform.GetChild(0).GetComponent<MeshRenderer>().material.color;
+            } else {
+                color = cylinder.GetComponent<MeshRenderer>().material.color;
+            }
             color.a = 0;
             transpMaterial.color = color;
-            cylinder.GetComponent<MeshRenderer>().material = transpMaterial;
+            if (!cylinder.GetComponent<MeshRenderer>()) {
+                cylinder.transform.GetChild(0).GetComponent<MeshRenderer>().material = transpMaterial;
+                cylinder.transform.GetChild(2).GetComponent<MeshRenderer>().material = transpMaterial;
+            } else {
+                cylinder.GetComponent<MeshRenderer>().material = transpMaterial;
+            }
             if (ring.GetComponent<MeshRenderer>() == null) {
                 ring.transform.GetChild(0).GetComponentInChildren<MeshRenderer>().material = transpMaterial;
                 ring.transform.GetChild(1).GetComponentInChildren<MeshRenderer>().material = transpMaterial;
@@ -1034,17 +1050,19 @@ public class CannonSoul : MonoBehaviour {
             }
             canvasMenuEndGame.SetActive(true);
 
-            if (PlayerPrefs.HasKey("savedLevel")) {
-                if (level == PlayerPrefs.GetInt("savedLevel")) {
+            if (level + 1 != 100) {
+                if (PlayerPrefs.HasKey("savedLevel")) {
+                    if (level == PlayerPrefs.GetInt("savedLevel")) {
+                        PlayerPrefs.SetInt("savedLevel", (level + 1));
+                    }
+                } else {
                     PlayerPrefs.SetInt("savedLevel", (level + 1));
                 }
-            } else {
-                PlayerPrefs.SetInt("savedLevel", (level + 1));
-            }
 
-            PlayerPrefs.SetInt("level", level + 1);
+                PlayerPrefs.SetInt("level", level + 1);
 
-            PlayerPrefs.Save();
+                PlayerPrefs.Save();
+            }            
         }
     }
 
@@ -1209,11 +1227,24 @@ public class CannonSoul : MonoBehaviour {
 
                                     TimeSpan ts = zeit.Elapsed;
                                     zeit.Stop();
-                                    Color color = cylinder.GetComponent<MeshRenderer>().material.color;
+                                    Color color;
+                                    if (!cylinder.GetComponent<MeshRenderer>()) {
+                                        color = cylinder.transform.GetChild(0).GetComponent<MeshRenderer>().material.color;
+                                    } else {
+                                        color = cylinder.GetComponent<MeshRenderer>().material.color;
+                                    }
                                     color.a = 0;
                                     transpMaterial.color = color;
-                                    cylinder.GetComponent<MeshRenderer>().material = transpMaterial;
-                                    ring.GetComponent<MeshRenderer>().material = transpMaterial;
+                                    if (!cylinder.GetComponent<MeshRenderer>()) {
+                                        cylinder.transform.GetChild(0).GetComponent<MeshRenderer>().material = transpMaterial;
+                                        cylinder.transform.GetChild(2).GetComponent<MeshRenderer>().material = transpMaterial;
+                                    } else {
+                                        cylinder.GetComponent<MeshRenderer>().material = transpMaterial;
+                                    }
+
+                                    if (!ring.GetComponent<MeshRenderer>()) {
+                                        ring.GetComponent<MeshRenderer>().material = transpMaterial;
+                                    }
 
                                     List<int> highscores = new List<int>();
 
@@ -1374,10 +1405,20 @@ public class CannonSoul : MonoBehaviour {
                         Debug.Log("Game Over 2!");
                         TimeSpan ts = zeit.Elapsed;
                         zeit.Stop();
-                        Color color = cylinder.GetComponent<MeshRenderer>().material.color;
+                        Color color;
+                        if (!cylinder.GetComponent<MeshRenderer>()) {
+                            color = cylinder.transform.GetChild(0).GetComponent<MeshRenderer>().material.color;
+                        } else {
+                            color = cylinder.GetComponent<MeshRenderer>().material.color;
+                        }
                         color.a = 0;
                         transpMaterial.color = color;
-                        cylinder.GetComponent<MeshRenderer>().material = transpMaterial;
+                        if (!cylinder.GetComponent<MeshRenderer>()) {
+                            cylinder.transform.GetChild(0).GetComponent<MeshRenderer>().material = transpMaterial;
+                            cylinder.transform.GetChild(2).GetComponent<MeshRenderer>().material = transpMaterial;
+                        } else {
+                            cylinder.GetComponent<MeshRenderer>().material = transpMaterial;
+                        }
                         if (ring.GetComponent<MeshRenderer>() == null) {
                             ring.transform.GetChild(0).GetComponentInChildren<MeshRenderer>().material = transpMaterial;
                             ring.transform.GetChild(1).GetComponentInChildren<MeshRenderer>().material = transpMaterial;
@@ -1555,10 +1596,25 @@ public class CannonSoul : MonoBehaviour {
             if (PlayerPrefs.GetInt("playSounds") == 1) {
                 switch(option) {
                     case 0: // Left Cannon Move
-                        audioSource.PlayOneShot(leftCannonMove, volume/8);
+                        switch (cannonId) {
+                            case 2:
+                                audioSource.PlayOneShot(leftCannonMove2, volume / 16);
+                                break;
+                            default:
+                                audioSource.PlayOneShot(leftCannonMove, volume / 8);
+                                break;
+                        }
                         break;
                     case 1: // Right Cannon Move
-                        audioSource.PlayOneShot(rightCannonMove, volume/16);
+                        switch (cannonId) {
+                            case 2:
+                                audioSource.PlayOneShot(rightCannonMove2, volume / 16);
+                                break;
+                            default:
+                                audioSource.PlayOneShot(rightCannonMove, volume / 16);
+                                break;
+                        }
+
                         break;
                     case 2: // Cannon Shoot
                         switch(cannonId) {
@@ -1569,7 +1625,7 @@ public class CannonSoul : MonoBehaviour {
                                 audioSource.PlayOneShot(cannon1, volume);
                                 break;
                             case 2:
-                                audioSource.PlayOneShot(cannon2, volume);
+                                audioSource.PlayOneShot(cannon2, volume*0.75f);
                                 break;
                             default:
                                 audioSource.PlayOneShot(cannon0, volume);
@@ -1616,9 +1672,9 @@ public class CannonSoul : MonoBehaviour {
             }
 
             Debug.Log("Level " + level);
-            if (level > 74) {
-                bgGO.GetComponent<SpriteRenderer>().sprite = bgBuild;
-                gateGO.GetComponent<SpriteRenderer>().sprite = gateBuild;
+            if (level >= 69) {
+                bgGO.GetComponent<SpriteRenderer>().sprite = bgFuture;
+                gateGO.GetComponent<SpriteRenderer>().sprite = gateFuture;
             } else if (level >= 39) {
                 bgGO.GetComponent<SpriteRenderer>().sprite = bgBuild;
                 gateGO.GetComponent<SpriteRenderer>().sprite = gateBuild;
@@ -1640,10 +1696,10 @@ public class CannonSoul : MonoBehaviour {
             }
         }
 
-        /*if (PlayerPrefs.HasKey("cannonId")) {
+        if (PlayerPrefs.HasKey("cannonId")) {
             cannonId = PlayerPrefs.GetInt("cannonId");
             //Debug.Log("Level " + level);
-        }*/
+        }
 
 
         // Disable screen dimming
@@ -1868,6 +1924,9 @@ public class CannonSoul : MonoBehaviour {
             ring.localPosition = new Vector2(frameWidth / 2, -ring.position.y);
             ring.localScale = new Vector3(ring.localScale.x * scaleFactor, ring.localScale.y * scaleFactor, ring.localScale.z * scaleFactor);
 
+            wheel.position = new Vector3(frameWidth / 2, wheel.position.y, -1);
+            wheel.localScale = new Vector3(wheel.localScale.x * scaleFactor, wheel.localScale.y * scaleFactor, wheel.localScale.z * scaleFactor);
+
             canvasPanelOnGame.GetComponent<RectTransform>().sizeDelta = new Vector2(1080, 2600);
             menuOnGame.GetComponent<RectTransform>().offsetMin = new Vector2(menuOnGame.GetComponent<RectTransform>().offsetMin.x, 690);
             menuOnGame.GetComponent<RectTransform>().offsetMax = new Vector2(menuOnGame.GetComponent<RectTransform>().offsetMax.x, -810);
@@ -2057,7 +2116,7 @@ public class CannonSoul : MonoBehaviour {
 
                     txtUserScore1.GetComponent<Text>().fontStyle = FontStyle.BoldAndItalic;
                 } else {
-                    Debug.Log("Serialized: " + PlayerPrefs.GetString("highscoreLevel"+(level+1)));
+                    //Debug.Log("Serialized: " + PlayerPrefs.GetString("highscoreLevel"+(level+1)));
                     highscores = GetHighScores(PlayerPrefs.GetString("highscoreLevel" + (level + 1)));
                     int i = 0;
 
@@ -2086,7 +2145,6 @@ public class CannonSoul : MonoBehaviour {
 
                     }
                     if (i == (highscores.Count/3)) {
-                        //Debug.Log("Here");
                         highscores.Add(shootCount);
                         highscores.Add(ts.Minutes);
                         highscores.Add(ts.Seconds);
@@ -2217,7 +2275,13 @@ public class CannonSoul : MonoBehaviour {
             ball.SetActive(false);
             ball.transform.parent = aimer;
             ball.transform.localPosition = Vector3.zero;
-            cylinder.GetComponent<Renderer>().material.color = ColorPalette[shootBallColor-1];
+            if (!cylinder.GetComponent<Renderer>()) {
+                cylinder.transform.GetChild(0).GetComponent<Renderer>().material.color = ColorPalette[shootBallColor - 1];
+                cylinder.transform.GetChild(2).GetComponent<Renderer>().material.color = ColorPalette[shootBallColor - 1];
+            } else {
+                cylinder.GetComponent<Renderer>().material.color = ColorPalette[shootBallColor - 1];
+            }
+            
 
             FadeInBall( 
                 ball.GetComponent<Renderer>().material,

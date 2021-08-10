@@ -1,9 +1,17 @@
 sceneSetups:
-- path: Assets/Scenes/ww2.unity
+- path: Assets/Scenes/Future.unity
+  isLoaded: 0
+  isActive: 0
+  isSubScene: 0
+- path: Assets/Scenes/EndGame.unity
   isLoaded: 0
   isActive: 0
   isSubScene: 0
 - path: Assets/Scenes/MiddleAge.unity
+  isLoaded: 0
+  isActive: 0
+  isSubScene: 0
+- path: Assets/Scenes/Ww2.unity
   isLoaded: 0
   isActive: 0
   isSubScene: 0

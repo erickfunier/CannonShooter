@@ -835,7 +835,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 668daa5d852924d80a7c43cd50289ae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  age: 1
+  age: 2
+  cannonId: 1
 --- !u!114 &194419281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1728,7 +1729,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 930107824}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 10
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -3247,6 +3248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   age: 1
+  cannonId: 0
 --- !u!114 &897683862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3635,11 +3637,14 @@ MonoBehaviour:
   cylinderAxis: {fileID: 1604601927}
   ring: {fileID: 1638041476}
   cannon: {fileID: 6409471638542383234}
+  wheel: {fileID: 303519822}
   transpMaterial: {fileID: 2100000, guid: 1a976b5cb35b2f148bf15d84b5564330, type: 2}
   audioSource: {fileID: 1185958234}
   audioSourceBG: {fileID: 1465394401}
   leftCannonMove: {fileID: 8300000, guid: 2a35e08c930b82247a4c4c7fe13e76a9, type: 3}
   rightCannonMove: {fileID: 8300000, guid: 955d26522d50b024e95ee1bb6784194a, type: 3}
+  leftCannonMove2: {fileID: 0}
+  rightCannonMove2: {fileID: 0}
   cannon0: {fileID: 8300000, guid: df8bcd347835c4ad8991080747f92ac1, type: 3}
   cannon1: {fileID: 8300000, guid: 2572a46a56f0b4eedb640299a401575f, type: 3}
   cannon2: {fileID: 8300000, guid: 0ef0eaf9386cd40edafc7c2f167b22f1, type: 3}
@@ -3657,6 +3662,8 @@ MonoBehaviour:
   gateWall: {fileID: 21300000, guid: dd3393199f1034f6c8869937521cf09a, type: 3}
   bgBuild: {fileID: 21300000, guid: f8a2d6be8ce14344b99a6df5e584ed55, type: 3}
   gateBuild: {fileID: 21300000, guid: 6ab4811e0be6a5e49902652d550ffcdc, type: 3}
+  bgFuture: {fileID: 0}
+  gateFuture: {fileID: 0}
 --- !u!1 &965983450
 GameObject:
   m_ObjectHideFlags: 0
@@ -3747,7 +3754,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 930107824}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 10
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -4044,7 +4051,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 930107824}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 10
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -4383,7 +4390,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 930107824}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 10
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -4946,7 +4953,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 930107824}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 10
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -5474,7 +5481,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 668daa5d852924d80a7c43cd50289ae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  age: 1
+  age: 2
+  cannonId: 1
 --- !u!114 &1430021793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6032,6 +6040,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   age: 1
+  cannonId: 0
 --- !u!1 &1498759791
 GameObject:
   m_ObjectHideFlags: 0
@@ -8205,7 +8214,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6409471638542607522}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1604601927}
