@@ -12,8 +12,7 @@ public class loadLevel : MonoBehaviour {
     public void loadSceneLevel() {
         string number = GetComponentInChildren<Text>().text;
         int savedLevel = PlayerPrefs.GetInt("savedLevel");
-        //Debug.Log("Text: " + number);
-        //Debug.Log("Saved: " + savedLevel);
+        
         if (int.Parse(number)-1 <= savedLevel) {
             PlayerPrefs.SetInt("cannonId", cannonId);
             PlayerPrefs.SetInt("level", int.Parse(number)-1);
@@ -47,7 +46,7 @@ public class loadLevel : MonoBehaviour {
         } else if (level >= 39 && level < 69) {
             PlayerPrefs.SetInt("cannonId", 1);
             SceneManager.LoadScene("ww2");
-        } else if (level >= 69 && level < 99) {
+        } else if (level >= 69 && level < 100) {
             PlayerPrefs.SetInt("cannonId", 2);
             SceneManager.LoadScene("Future");            
         } else {

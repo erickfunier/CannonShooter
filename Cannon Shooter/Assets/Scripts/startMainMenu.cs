@@ -41,7 +41,7 @@ public class startMainMenu : MonoBehaviour {
         } else {
             PlayerPrefs.SetInt("savedLevel", 0);
         }
-
+        savedLevel = 99;
         for (int i = 0; i < savedLevel + 1; i++) {
             scrollViewContent.transform.GetChild(i).GetComponent<Image>().color = Color.white;
             scrollViewContent.transform.GetChild(i).GetComponent<Button>().interactable = true;

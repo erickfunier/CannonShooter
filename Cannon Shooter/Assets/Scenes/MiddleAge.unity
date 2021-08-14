@@ -5023,10 +5023,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dotPrefab: {fileID: 3378379961854759641, guid: e83a695d895576e4e83304b4ed4800d4,
     type: 3}
-  m_menuOnGame: {fileID: 394293583}
-  m_menuEndGame: {fileID: 1267708040}
-  m_menuGameOver: {fileID: 1070302643}
-  m_helpPath: {fileID: 700282451}
+  menuOnGame: {fileID: 394293583}
+  menuEndGame: {fileID: 1267708040}
+  menuGameOver: {fileID: 1070302643}
+  helpPath: {fileID: 700282451}
 --- !u!1 &1353899688
 GameObject:
   m_ObjectHideFlags: 0

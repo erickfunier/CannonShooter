@@ -5,10 +5,10 @@ using UnityEngine.UI;
 public class RayCastShooter : MonoBehaviour {
 
     public GameObject dotPrefab;
-    public GameObject m_menuOnGame = null;
-    public GameObject m_menuEndGame = null;
-    public GameObject m_menuGameOver = null;
-    public Toggle m_helpPath = null;
+    public GameObject menuOnGame = null;
+    public GameObject menuEndGame = null;
+    public GameObject menuGameOver = null;
+    public Toggle helpPath = null;
 
     private bool mouseDown = false;
     private List<Vector2> dots;
@@ -25,13 +25,13 @@ public class RayCastShooter : MonoBehaviour {
 
         if (PlayerPrefs.HasKey("helpPath")) {
             if (PlayerPrefs.GetInt("helpPath") == 1) {
-                m_helpPath.isOn = true;
+                helpPath.isOn = true;
             } else {
-                m_helpPath.isOn = false;
+                helpPath.isOn = false;
             }
         }
 
-        if (m_helpPath.isOn) {
+        if (helpPath.isOn) {
 
             dots = new List<Vector2>();
             dotsPool = new List<GameObject>();
@@ -57,7 +57,7 @@ public class RayCastShooter : MonoBehaviour {
     }
 
     void HandleTouchUp(Vector2 touch) {
-        if (touch.y < 280 || m_menuOnGame.activeSelf || m_menuEndGame.activeSelf || m_menuGameOver.activeSelf)
+        if (touch.y < 280 || menuOnGame.activeSelf || menuEndGame.activeSelf || menuGameOver.activeSelf)
             return;
 
         if (dots == null || dots.Count < 2)
@@ -70,7 +70,7 @@ public class RayCastShooter : MonoBehaviour {
     }
 
     void HandleTouchMove(Vector2 touch) {
-        if (touch.y < 280 || m_menuOnGame.activeSelf || m_menuEndGame.activeSelf || m_menuGameOver.activeSelf || !Input.GetMouseButton(0))
+        if (touch.y < 280 || menuOnGame.activeSelf || menuEndGame.activeSelf || menuGameOver.activeSelf || !Input.GetMouseButton(0))
             return;
 
         if (dots == null) {
@@ -82,12 +82,6 @@ public class RayCastShooter : MonoBehaviour {
         foreach (var d in dotsPool)
             d.SetActive(false);
 
-        //Vector2 point = Camera.main.ScreenToWorldPoint(touch);
-        
-        //Debug.Log("Point: " + point);
-        
-
-        //var direction = new Vector2(point.x - transform.position.x, point.y - transform.position.y);
         var pt = Input.mousePosition;
         var o = Camera.main.WorldToScreenPoint( transform.position );
         o.y = Mathf.Clamp( o.y, 0, 9.75f );
@@ -95,14 +89,14 @@ public class RayCastShooter : MonoBehaviour {
         pt.z = 0;
         var direction = pt - o;
 
-        Debug.Log("Direction: " + direction);
+        //Debug.Log("Direction: " + direction);
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction);
-        Debug.Log("Hit: " + hit.point);
-        Debug.Log("Hit results: " + hit);
+        //Debug.Log("Hit: " + hit.point);
+        //Debug.Log("Hit results: " + hit);
         if (hit.collider != null) {
             dots.Add(transform.position);
-            Debug.Log("Hit Collider Tag: " + hit.collider.tag);
+            //Debug.Log("Hit Collider Tag: " + hit.collider.tag);
             if (hit.collider.tag == "SideWall") {
                 DoRayCast(hit, direction);
             } else {
@@ -141,9 +135,9 @@ public class RayCastShooter : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (!started && m_helpPath.isOn) {
+        if (!started && helpPath.isOn) {
             Start();
-        } else if (started && !m_helpPath.isOn) {
+        } else if (started && !helpPath.isOn) {
             for (int i = 0; i < maxDots; i++) {
                 Destroy(dotsPool[i]);
             }

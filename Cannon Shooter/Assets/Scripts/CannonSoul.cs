@@ -1242,7 +1242,7 @@ public class CannonSoul : MonoBehaviour {
                                         cylinder.GetComponent<MeshRenderer>().material = transpMaterial;
                                     }
 
-                                    if (!ring.GetComponent<MeshRenderer>()) {
+                                    if (ring.GetComponent<MeshRenderer>()) {
                                         ring.GetComponent<MeshRenderer>().material = transpMaterial;
                                     }
 
@@ -2087,7 +2087,7 @@ public class CannonSoul : MonoBehaviour {
 
     void Update() {
         // if press space bar add new line to game (DEBUG)
-        if (Input.GetKeyDown(KeyCode.Space) && flyingBall == null && levelUpdating == false) {
+        /*if (Input.GetKeyDown(KeyCode.Space) && flyingBall == null && levelUpdating == false) {
             //NewLine();
             NewBlankLine();
             //_CheckDeadline();
@@ -2210,7 +2210,7 @@ public class CannonSoul : MonoBehaviour {
                 }
                 canvasMenuGameOver.SetActive(true);
              }
-        }
+        }*/
 
         // if mouse left click set aimer rotation
         if (Input.GetMouseButton(0) && !canvasMenuOnGame.activeSelf && !canvasMenuEndGame.activeSelf && !canvasMenuGameOver.activeSelf && !canvasMenuConfirm.activeSelf) {
@@ -2232,19 +2232,19 @@ public class CannonSoul : MonoBehaviour {
                     //Debug.Log(aimer.rotation.eulerAngles.z - angle);
                     if (aimer.rotation.eulerAngles.z - angle > 360) {
                         if(aimer.rotation.eulerAngles.z - angle-360 > 2) {
-                            playOneShot(1);
+                            playOneShot(1); // Left Cannon Move
                         }
                     } else if (aimer.rotation.eulerAngles.z - angle < 359 && aimer.rotation.eulerAngles.z - angle > 350) {
                         if(aimer.rotation.eulerAngles.z - angle-360 < 2) {
-                            playOneShot(0);
+                            playOneShot(0); // Right Cannon Move
                         }
                     } else if (aimer.rotation.eulerAngles.z - angle > 0 && aimer.rotation.eulerAngles.z - angle < 10) {
                         if(aimer.rotation.eulerAngles.z - angle > 2) {
-                            playOneShot(1);
+                            playOneShot(1); // Left Cannon Move
                         }
                     } else if (aimer.rotation.eulerAngles.z - angle < -1 && aimer.rotation.eulerAngles.z - angle > -10) {
                         if(aimer.rotation.eulerAngles.z - angle < 2) {
-                            playOneShot(0);
+                            playOneShot(0); // Right Cannon Move
                         }
                     }
 

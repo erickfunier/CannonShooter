@@ -8,13 +8,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenuScene.unity
     guid: 5b37d5624cc0f4344a97301a4af571b0
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/Scenes/ww2.unity
-    guid: ebf4c24af35f63247816bf9d23a6734f
   - enabled: 1
     path: Assets/Scenes/MiddleAge.unity
     guid: da89fc374a24e254f9dc4a86abe4d1fb
+  - enabled: 1
+    path: Assets/Scenes/Ww2.unity
+    guid: ebf4c24af35f63247816bf9d23a6734f
+  - enabled: 1
+    path: Assets/Scenes/Future.unity
+    guid: c73d2f78ce3ba7a41836e33e189c9ec0
+  - enabled: 1
+    path: Assets/Scenes/EndGame.unity
+    guid: a5181ce4a11f56441b04ba438a8a53b3
   m_configObjects: {}
